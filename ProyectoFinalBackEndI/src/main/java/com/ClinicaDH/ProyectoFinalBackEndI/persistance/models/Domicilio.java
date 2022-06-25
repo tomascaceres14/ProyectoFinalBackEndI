@@ -10,7 +10,7 @@ public class Domicilio {
     @Id
     @SequenceGenerator(name = "domicilio_sequence", sequenceName = "domicilio_sequence")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "domicilio_sequence")
-    private Integer id;
+    private Long id;
 
     @Column
     private String calle;
@@ -39,7 +39,7 @@ public class Domicilio {
         this.pacientes = new ArrayList<>();
     }
 
-    public Domicilio(Integer id, String calle, String numero, String localidad, String provincia) {
+    public Domicilio(Long id, String calle, String numero, String localidad, String provincia) {
         this.id = id;
         this.calle = calle;
         this.numero = numero;
@@ -48,12 +48,8 @@ public class Domicilio {
         this.pacientes = new ArrayList<>();
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getCalle() {

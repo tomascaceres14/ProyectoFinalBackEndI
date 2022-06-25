@@ -1,12 +1,26 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.persistance.models;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table
 public class Turno {
 
-    private Integer id;
+    @Id
+    @SequenceGenerator(name = "turno_sequence", sequenceName = "turno_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "turno_sequence")
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "odontologo_id")
     private Odontologo odontologo;
+
+    @Column
     private Date fecha;
 
     public Turno() {
@@ -18,19 +32,15 @@ public class Turno {
         this.fecha = fecha;
     }
 
-    public Turno(Integer id, Paciente paciente, Odontologo odontologo, Date date) {
+    public Turno(Long id, Paciente paciente, Odontologo odontologo, Date date) {
         this.id = id;
         this.paciente = paciente;
         this.odontologo = odontologo;
         this.fecha = date;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Paciente getPaciente() {

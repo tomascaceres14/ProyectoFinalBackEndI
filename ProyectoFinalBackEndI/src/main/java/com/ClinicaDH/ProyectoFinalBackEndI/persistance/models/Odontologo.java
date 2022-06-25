@@ -9,7 +9,7 @@ public class Odontologo {
     @Id
     @SequenceGenerator(name = "odontologo_sequence", sequenceName = "odontologo_sequence")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "odontologo_sequence")
-    private Integer id;
+    private Long id;
 
     @Column
     private String nombre;
@@ -29,19 +29,15 @@ public class Odontologo {
         this.matricula = matricula;
     }
 
-    public Odontologo(Integer id, String nombre, String apellido, Integer matricula) {
+    public Odontologo(Long id, String nombre, String apellido, Integer matricula) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.matricula = matricula;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNombre() {
