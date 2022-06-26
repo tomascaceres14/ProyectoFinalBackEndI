@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+// Implementacion del servicio. Aca trabajamos la logica del manejo de datos. Nuestro objetivo no es mas que el desarrollo del CRUD.
+
 @Service
 public class OdontologoService implements IService<Odontologo> {
+
+    // Anotacion Autowired genera la inyeccion de la dependencia OdontologoRepository para acceder a los metodos.
     @Autowired
     OdontologoRepository repository;
 

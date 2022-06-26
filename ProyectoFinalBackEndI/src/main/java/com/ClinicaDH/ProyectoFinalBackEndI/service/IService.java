@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// Ya que vamos a tener que crear una clase de servicio para cada modelo que presentemos, diseñamos esta interface
+// para que posteriormente las clases a crear hereden de este y asi reciclar codigo y encapsular los servicios.
+
 public interface IService<T> {
 
     public String guardar(T object);
