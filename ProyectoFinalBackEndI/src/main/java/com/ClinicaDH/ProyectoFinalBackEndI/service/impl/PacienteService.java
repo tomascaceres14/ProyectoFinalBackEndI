@@ -1,10 +1,7 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.service.impl;
 
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Domicilio;
-import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Paciente;
-import com.ClinicaDH.ProyectoFinalBackEndI.persistance.repository.DomicilioRepository;
-import com.ClinicaDH.ProyectoFinalBackEndI.persistance.repository.OdontologoRepository;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.repository.PacienteRepository;
 import com.ClinicaDH.ProyectoFinalBackEndI.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +38,11 @@ public class PacienteService implements IService<Paciente> {
     @Override
     public String eliminar(Long id) {
         if(repository.findById(id).isPresent()){
-            String productName = repository.getReferenceById(id).getNombre();
+            String pacienteName = repository.getReferenceById(id).getNombre();
             repository.deleteById(id);
-            return "Producto id: " + id + ", nombre: " + productName + " fué eliminado.";
+            return "Paciente id: " + id + ", nombre: " + pacienteName + " fué eliminado.";
         }
-        return "Producto id: " + id + " no fué encontrado.";
+        return "Paciente id: " + id + " no fué encontrado.";
     }
 
     @Override
@@ -70,7 +67,7 @@ public class PacienteService implements IService<Paciente> {
             pacienteAct.setNombre(object.getNombre() != null ?  object.getNombre() : pacienteAct.getNombre());
             pacienteAct.setApellido(object.getApellido() != null ?  object.getApellido() : pacienteAct.getApellido());
             pacienteAct.setDni(object.getDni() != null ?  object.getDni() : pacienteAct.getDni());
-            pacienteAct.setDomicilio(object.getDomicilio() != null ?  object.getDomicilio() : pacienteAct.getDomicilio());
+            pacienteAct.setDomicilio(object.getDomicilio() != null ?  domicilioService.actualizar(pacienteAct.getDomicilio().getId(), object.getDomicilio()) : pacienteAct.getDomicilio());
             pacienteAct.setFechaIngreso(object.getFechaIngreso() != null ?  object.getFechaIngreso() : pacienteAct.getFechaIngreso());
 
             repository.save(pacienteAct);

@@ -47,7 +47,22 @@ public class DomicilioService implements IService<Domicilio> {
 
     @Override
     public Domicilio actualizar(Long id, Domicilio object) {
-        return null;
+
+        Domicilio respuesta = null;
+
+        if(repository.findById(id).isPresent()) {
+
+            Domicilio odontologoAct = repository.getReferenceById(id);
+            odontologoAct.setCalle(object.getCalle() != null ?  object.getCalle() : odontologoAct.getCalle());
+            odontologoAct.setNumero(object.getNumero() != null ?  object.getNumero() : odontologoAct.getNumero());
+            odontologoAct.setLocalidad(object.getLocalidad() != null ?  object.getLocalidad() : odontologoAct.getLocalidad());
+            odontologoAct.setProvincia(object.getProvincia() != null ?  object.getProvincia() : odontologoAct.getProvincia());
+            repository.save(odontologoAct);
+
+            respuesta = odontologoAct;
+        }
+
+        return respuesta;
     }
 
     @Override

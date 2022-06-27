@@ -42,12 +42,12 @@ public class PacienteController {
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Paciente> actualizarOdontologo(@PathVariable Long id, @RequestBody Paciente p){
+    public ResponseEntity<Paciente> actualizarPaciente(@PathVariable Long id, @RequestBody Paciente p){
         return ResponseEntity.ok(service.actualizar(id, p));
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> eliminarOdontologo(@PathVariable Long id){
+    public ResponseEntity<String> eliminarPaciente(@PathVariable Long id){
         return ResponseEntity.ok(service.eliminar(id));
     }
 }
