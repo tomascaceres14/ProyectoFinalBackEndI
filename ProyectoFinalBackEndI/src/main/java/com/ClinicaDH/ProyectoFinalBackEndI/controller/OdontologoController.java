@@ -1,5 +1,4 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.controller;
-
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import com.ClinicaDH.ProyectoFinalBackEndI.service.impl.OdontologoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +21,13 @@ public class OdontologoController {
     // Explayando lo descrito anteriormente, con el @PostMapping declaramos que cuando el endpoint /crear reciba una
     // peticion POST, se ejecute el metodo que se encuentra por debajo. El resto funciona igual, con la diferencia que
     // cambia el tipo de peticion que maneja.
-    
+
     @PostMapping("/crear")
     public ResponseEntity<String> postOdontologo(@RequestBody Odontologo o){
         ResponseEntity<String> respuesta = null;
 
         if(service.guardar(o) != null){
-            respuesta = ResponseEntity.ok("El movimiento fue registrado con éxito");
+            respuesta = ResponseEntity.ok("El odontologo fue registrado con éxito");
         }else{
             respuesta = ResponseEntity.internalServerError().body("Ooops");
         }

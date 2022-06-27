@@ -1,6 +1,7 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.service.impl;
 
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Domicilio;
+import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Paciente;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.repository.DomicilioRepository;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.repository.OdontologoRepository;
@@ -35,7 +36,13 @@ public class DomicilioService implements IService<Domicilio> {
 
     @Override
     public Domicilio buscar(Long id) {
-        return null;
+
+        Domicilio domicilio = null;
+        if(repository.findById(id).isPresent()){
+            domicilio = repository.getReferenceById(id);
+        }
+
+        return domicilio;
     }
 
     @Override

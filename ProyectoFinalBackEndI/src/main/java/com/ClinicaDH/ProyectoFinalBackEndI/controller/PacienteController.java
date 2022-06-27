@@ -25,7 +25,7 @@ public class PacienteController {
         ResponseEntity<String> respuesta = null;
 
         if(service.guardar(p) != null){
-            respuesta = ResponseEntity.ok("El movimiento fue registrado con éxito");
+            respuesta = ResponseEntity.ok("El paciente fue registrado con éxito");
         }else{
             respuesta = ResponseEntity.internalServerError().body("Ooops");
         }

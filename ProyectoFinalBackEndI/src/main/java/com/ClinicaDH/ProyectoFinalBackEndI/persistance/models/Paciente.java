@@ -21,10 +21,14 @@ public class Paciente {
     @Column
     private String dni;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "odontologo_id")
+    private Odontologo odontologo;
+
     @Column(name = "fecha_ingreso")
     private Date fechaIngreso;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
 
