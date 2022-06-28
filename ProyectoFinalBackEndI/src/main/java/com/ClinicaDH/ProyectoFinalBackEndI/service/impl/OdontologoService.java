@@ -19,7 +19,7 @@ public class OdontologoService implements IService<Odontologo> {
     @Override
     public String guardar(Odontologo object) {
         if (repository.save(object) != null){
-            return "OK";
+            return "Se ha guardado el odontologo con domicilio existente";
         } else return null;
     }
 

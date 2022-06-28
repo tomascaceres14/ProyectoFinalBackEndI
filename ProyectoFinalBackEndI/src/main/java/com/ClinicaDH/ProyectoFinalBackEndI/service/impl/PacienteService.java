@@ -14,23 +14,31 @@ public class PacienteService implements IService<Paciente> {
 
     @Autowired
     private PacienteRepository repository;
+
+    // Ya que el Paciente tiene un Domicilio como atributo vamos a necesitar el Service del mismo para controlarlo.
     @Autowired
     private DomicilioService domicilioService;
 
     @Override
     public String guardar(Paciente object) {
 
-        String respuesta = null;
+        // Aca, a diferencia del OdontologoService, no solo tenemos que guardar un objeto de tipo Paciente sino que
+        // tambien uno de tipo Domicilio ya que es donde reside el mismo. Para eso, implementamos la siguiente logica:
+        // Si el Body del POST, dentro de Domicilio lleva un id, significa que el domicilio ya existe y queremos conectarlo
+        // con el mismo. Si id es nulo, es porque nos estan pasando el objeto de tipo Domicilio, por lo que tendremos
+        // que generar un nuevo registro.
+
+        String respuesta = "";
         Long domicilioId = object.getDomicilio().getId();
 
         if( domicilioId != null){
             Domicilio domicilio = domicilioService.buscar(domicilioId);
             object.setDomicilio(domicilio);
             repository.save(object);
-            respuesta = "OK";
+            respuesta = "Se ha guardado el paciente con domicilio existente";
         } else {
             repository.save(object);
-            respuesta = "OK";
+            respuesta = "Se ha guardado el paciente con domicilio existente";
         }
         return respuesta;
     }
@@ -38,9 +46,10 @@ public class PacienteService implements IService<Paciente> {
     @Override
     public String eliminar(Long id) {
         if(repository.findById(id).isPresent()){
-            String pacienteName = repository.getReferenceById(id).getNombre();
+            String nombre = repository.getReferenceById(id).getNombre();
+            String apellido = repository.getReferenceById(id).getApellido();
             repository.deleteById(id);
-            return "Paciente id: " + id + ", nombre: " + pacienteName + " fué eliminado.";
+            return "Paciente " + nombre + " " + apellido + ", id: " + id + " ha sido eliminado.";
         }
         return "Paciente id: " + id + " no fué encontrado.";
     }
@@ -67,6 +76,7 @@ public class PacienteService implements IService<Paciente> {
             pacienteAct.setNombre(object.getNombre() != null ?  object.getNombre() : pacienteAct.getNombre());
             pacienteAct.setApellido(object.getApellido() != null ?  object.getApellido() : pacienteAct.getApellido());
             pacienteAct.setDni(object.getDni() != null ?  object.getDni() : pacienteAct.getDni());
+            // Aqui, como tratamos de actualizar el domicilio, llamamos al metodo de su Service para que se encargue del mismo.
             pacienteAct.setDomicilio(object.getDomicilio() != null ?  domicilioService.actualizar(pacienteAct.getDomicilio().getId(), object.getDomicilio()) : pacienteAct.getDomicilio());
             pacienteAct.setFechaIngreso(object.getFechaIngreso() != null ?  object.getFechaIngreso() : pacienteAct.getFechaIngreso());
 

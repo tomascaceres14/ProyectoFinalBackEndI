@@ -21,10 +21,6 @@ public class Paciente {
     @Column
     private String dni;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "odontologo_id")
-    private Odontologo odontologo;
-
     @Column(name = "fecha_ingreso")
     private Date fechaIngreso;
 
@@ -37,15 +33,6 @@ public class Paciente {
 
     public Paciente(String nombre, String apellido, String dni, Date fechaIngreso, Domicilio domicilio) {
 
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-        this.fechaIngreso = fechaIngreso;
-        this.domicilio = domicilio;
-    }
-
-    public Paciente(Long id, String nombre, String apellido, String dni, Date fechaIngreso, Domicilio domicilio) {
-        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;

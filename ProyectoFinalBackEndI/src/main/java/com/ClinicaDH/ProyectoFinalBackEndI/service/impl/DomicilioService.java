@@ -19,7 +19,7 @@ public class DomicilioService implements IService<Domicilio> {
     @Override
     public String guardar(Domicilio object) {
         if (repository.save(object) != null){
-            return "OK";
+            return "Se ha guardado el domicilio exitosamente";
         } else return null;
     }
 
@@ -29,9 +29,9 @@ public class DomicilioService implements IService<Domicilio> {
             String calle = repository.getReferenceById(id).getCalle();
             String numero = repository.getReferenceById(id).getNumero();
             repository.deleteById(id);
-            return "Domicilio id: " + id + ", direccion: " + calle + " " + numero + " fué eliminado.";
+            return "Domicilio id: "  + calle + " " + numero + " + id: " + id + "  ha sido eliminado.";
         }
-        return "Domicilio id: " + id + " no fué encontrado.";
+        return "Domicilio id: " + id + " no ha sido encontrado.";
     }
 
     @Override
@@ -67,6 +67,6 @@ public class DomicilioService implements IService<Domicilio> {
 
     @Override
     public List<Domicilio> buscarTodos() {
-        return null;
+        return repository.findAll();
     }
 }
