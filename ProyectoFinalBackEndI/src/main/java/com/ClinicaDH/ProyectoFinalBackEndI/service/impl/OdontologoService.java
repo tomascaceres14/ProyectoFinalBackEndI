@@ -11,16 +11,14 @@ import java.util.List;
 
 @Service
 public class OdontologoService implements IService<Odontologo> {
-
     // Anotacion Autowired genera la inyeccion de la dependencia OdontologoRepository para acceder a los metodos.
     @Autowired
     OdontologoRepository repository;
 
     @Override
     public String guardar(Odontologo object) {
-        if (repository.save(object) != null){
-            return "Se ha guardado el odontologo con domicilio existente";
-        } else return null;
+        repository.save(object);
+        return "Se ha guardado el odontologo con domicilio existente";
     }
 
     @Override
