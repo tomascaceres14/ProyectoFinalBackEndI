@@ -38,7 +38,7 @@ public class PacienteService implements IService<Paciente> {
             respuesta = "Se ha guardado el paciente con domicilio existente";
         } else {
             repository.save(object);
-            respuesta = "Se ha guardado el paciente con domicilio existente";
+            respuesta = "Se ha guardado el paciente con domicilio nuevo";
         }
         return respuesta;
     }

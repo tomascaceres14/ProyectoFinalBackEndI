@@ -72,7 +72,7 @@ public class Turno {
         return "Turno{" +
                 "id=" + id +
                 ", paciente=" + paciente +
-                ", odontologo=" + odontologo +
+                ", odontologoForm.js=" + odontologo +
                 ", fecha=" + fecha +
                 '}';
     }

@@ -1,9 +1,10 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.persistance.models;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 
 // Clase Odontologo, utilizamos anotaciones para referenciar atributos de clase con columnas y establecer relaciones
-
 @Entity
 @Table
 public class Odontologo {

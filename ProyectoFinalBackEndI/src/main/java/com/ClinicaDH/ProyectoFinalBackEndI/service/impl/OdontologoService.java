@@ -18,7 +18,7 @@ public class OdontologoService implements IService<Odontologo> {
     @Override
     public String guardar(Odontologo object) {
         repository.save(object);
-        return "Se ha guardado el odontologo con domicilio existente";
+        return "Se ha guardado el odontologo";
     }
 
     @Override
@@ -27,9 +27,9 @@ public class OdontologoService implements IService<Odontologo> {
             String odontologoNombre = repository.getReferenceById(id).getNombre();
             String odontologoApellido = repository.getReferenceById(id).getApellido();
             repository.deleteById(id);
-            return "Paciente id: " + id + ", nombre: " + odontologoNombre + " " + odontologoApellido + " fué eliminado.";
+            return "Odontologo id: " + id + ", nombre: " + odontologoNombre + " " + odontologoApellido + " fué eliminado.";
         }
-        return "Producto id: " + id + " no fué encontrado.";
+        return "Odontologo id: " + id + " no fué encontrado.";
     }
 
     @Override

@@ -24,7 +24,7 @@ public class Domicilio {
     @Column
     private String provincia;
 
-    @OneToMany(mappedBy = "domicilio", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "domicilio")
     private List<Paciente> pacientes;
 
     public Domicilio() {
