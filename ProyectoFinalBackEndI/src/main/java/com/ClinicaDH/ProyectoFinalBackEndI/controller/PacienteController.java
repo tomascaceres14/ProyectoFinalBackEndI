@@ -1,12 +1,8 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.controller;
 
-import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Paciente;
-import com.ClinicaDH.ProyectoFinalBackEndI.service.IService;
-import com.ClinicaDH.ProyectoFinalBackEndI.service.impl.OdontologoService;
 import com.ClinicaDH.ProyectoFinalBackEndI.service.impl.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -36,18 +32,18 @@ public class PacienteController {
         return ResponseEntity.ok(service.buscar(id));
     }
 
-    @GetMapping("")
-    public ResponseEntity<List<Paciente>> consultarTodos(){
-        return ResponseEntity.ok(service.buscarTodos());
-    }
-
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Paciente> actualizarPaciente(@PathVariable Long id, @RequestBody Paciente p){
+    public ResponseEntity<Paciente> updatePaciente(@PathVariable Long id, @RequestBody Paciente p){
         return ResponseEntity.ok(service.actualizar(id, p));
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> eliminarPaciente(@PathVariable Long id){
+    public ResponseEntity<String> deletePaciente(@PathVariable Long id){
         return ResponseEntity.ok(service.eliminar(id));
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<Paciente>> getAllPacientes(){
+        return ResponseEntity.ok(service.buscarTodos());
     }
 }

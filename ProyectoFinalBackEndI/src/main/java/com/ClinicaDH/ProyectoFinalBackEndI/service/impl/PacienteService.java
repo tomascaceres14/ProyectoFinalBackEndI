@@ -44,17 +44,6 @@ public class PacienteService implements IService<Paciente> {
     }
 
     @Override
-    public String eliminar(Long id) {
-        if(repository.findById(id).isPresent()){
-            String nombre = repository.getReferenceById(id).getNombre();
-            String apellido = repository.getReferenceById(id).getApellido();
-            repository.deleteById(id);
-            return "Paciente " + nombre + " " + apellido + ", id: " + id + " ha sido eliminado.";
-        }
-        return "Paciente id: " + id + " no fué encontrado.";
-    }
-
-    @Override
     public Paciente buscar(Long id) {
 
         Paciente paciente = null;
@@ -72,7 +61,7 @@ public class PacienteService implements IService<Paciente> {
 
         if(repository.findById(id).isPresent()) {
 
-            Paciente pacienteAct = repository.getReferenceById(id);
+            Paciente pacienteAct = repository.findById(id).get();
             pacienteAct.setNombre(object.getNombre() != null ?  object.getNombre() : pacienteAct.getNombre());
             pacienteAct.setApellido(object.getApellido() != null ?  object.getApellido() : pacienteAct.getApellido());
             pacienteAct.setDni(object.getDni() != null ?  object.getDni() : pacienteAct.getDni());
@@ -86,6 +75,17 @@ public class PacienteService implements IService<Paciente> {
         }
 
         return respuesta;
+    }
+
+    @Override
+    public String eliminar(Long id) {
+        if(repository.findById(id).isPresent()){
+            String nombre = repository.findById(id).get().getNombre();
+            String apellido = repository.findById(id).get().getApellido();
+            repository.deleteById(id);
+            return "Paciente " + nombre + " " + apellido + ", id: " + id + " ha sido eliminado.";
+        }
+        return "Paciente id: " + id + " no fué encontrado.";
     }
 
     @Override

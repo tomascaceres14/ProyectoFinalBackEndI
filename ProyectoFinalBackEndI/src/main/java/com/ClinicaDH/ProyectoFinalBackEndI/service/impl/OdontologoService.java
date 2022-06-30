@@ -22,21 +22,10 @@ public class OdontologoService implements IService<Odontologo> {
     }
 
     @Override
-    public String eliminar(Long id) {
-        if(repository.findById(id).isPresent()){
-            String odontologoNombre = repository.getReferenceById(id).getNombre();
-            String odontologoApellido = repository.getReferenceById(id).getApellido();
-            repository.deleteById(id);
-            return "Odontologo id: " + id + ", nombre: " + odontologoNombre + " " + odontologoApellido + " fué eliminado.";
-        }
-        return "Odontologo id: " + id + " no fué encontrado.";
-    }
-
-    @Override
     public Odontologo buscar(Long id) {
         Odontologo odontologo = null;
         if(repository.findById(id).isPresent()){
-            odontologo = repository.getReferenceById(id);
+            odontologo = repository.findById(id).get();
         }
 
         return odontologo;
@@ -50,7 +39,7 @@ public class OdontologoService implements IService<Odontologo> {
 
         if(repository.findById(id).isPresent()) {
 
-            Odontologo odontologoAct = repository.getReferenceById(id);
+            Odontologo odontologoAct = repository.findById(id).get();
             odontologoAct.setNombre(object.getNombre() != null ?  object.getNombre() : odontologoAct.getNombre());
             odontologoAct.setApellido(object.getApellido() != null ?  object.getApellido() : odontologoAct.getApellido());
             odontologoAct.setMatricula(object.getMatricula() != null ?  object.getMatricula() : odontologoAct.getMatricula());
@@ -60,6 +49,17 @@ public class OdontologoService implements IService<Odontologo> {
         }
 
         return respuesta;
+    }
+
+    @Override
+    public String eliminar(Long id) {
+        if(repository.findById(id).isPresent()){
+            String odontologoNombre = repository.findById(id).get().getNombre();
+            String odontologoApellido = repository.findById(id).get().getApellido();
+            repository.deleteById(id);
+            return "Odontologo id: " + id + ", nombre: " + odontologoNombre + " " + odontologoApellido + " fué eliminado.";
+        }
+        return "Odontologo id: " + id + " no fué encontrado.";
     }
 
     @Override

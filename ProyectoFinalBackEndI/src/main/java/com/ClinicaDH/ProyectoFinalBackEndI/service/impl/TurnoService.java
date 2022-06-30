@@ -36,16 +36,6 @@ public class TurnoService implements IService<Turno> {
     }
 
     @Override
-    public String eliminar(Long id) {
-        if(repository.findById(id).isPresent()){
-            
-            repository.deleteById(id);
-            return "Turno id: " + id + " ha sido eliminado.";
-        }
-        return "Turno id: " + id + " no ha sido encontrado.";
-    }
-
-    @Override
     public Turno buscar(Long id) {
         Turno turno = null;
         if(repository.findById(id).isPresent()) {
@@ -61,7 +51,7 @@ public class TurnoService implements IService<Turno> {
 
         if(repository.findById(id).isPresent()) {
 
-            Turno turnoAct = repository.getReferenceById(id);
+            Turno turnoAct = repository.findById(id).get();
 
             Long odontologoId = object.getOdontologo().getId();
             Long pacienteId = object.getPaciente().getId();
@@ -79,6 +69,16 @@ public class TurnoService implements IService<Turno> {
         }
 
         return respuesta;
+    }
+
+    @Override
+    public String eliminar(Long id) {
+        if(repository.findById(id).isPresent()){
+
+            repository.deleteById(id);
+            return "Turno id: " + id + " ha sido eliminado.";
+        }
+        return "Turno id: " + id + " no ha sido encontrado.";
     }
 
     @Override

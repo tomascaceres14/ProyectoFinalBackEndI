@@ -38,18 +38,18 @@ public class OdontologoController {
         return ResponseEntity.ok(service.buscar(id));
     }
 
-    @GetMapping("")
-    public ResponseEntity<List<Odontologo>> consultarTodos(){
-        return ResponseEntity.ok(service.buscarTodos());
-    }
-
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Odontologo> actualizarOdontologo(@PathVariable Long id, @RequestBody Odontologo o){
+    public ResponseEntity<Odontologo> updateOdontologo(@PathVariable Long id, @RequestBody Odontologo o){
         return ResponseEntity.ok(service.actualizar(id, o));
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> eliminarOdontologo(@PathVariable Long id){
+    public ResponseEntity<String> deleteOdontologo(@PathVariable Long id){
         return ResponseEntity.ok(service.eliminar(id));
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<Odontologo>> getAllOdontologos(){
+        return ResponseEntity.ok(service.buscarTodos());
     }
 }

@@ -1,7 +1,6 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.controller;
 
 
-import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Turno;
 import com.ClinicaDH.ProyectoFinalBackEndI.service.impl.TurnoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,18 +35,18 @@ public class TurnoController {
         return ResponseEntity.ok(service.buscar(id));
     }
 
-    @GetMapping("")
-    public ResponseEntity<List<Turno>> consultarTodos(){
-        return ResponseEntity.ok(service.buscarTodos());
-    }
-
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Turno> actualizarOdontologo(@PathVariable Long id, @RequestBody Turno t){
+    public ResponseEntity<Turno> updateTurnos(@PathVariable Long id, @RequestBody Turno t){
         return ResponseEntity.ok(service.actualizar(id, t));
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> eliminarOdontologo(@PathVariable Long id){
+    public ResponseEntity<String> deleteTurnos(@PathVariable Long id){
         return ResponseEntity.ok(service.eliminar(id));
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<Turno>> getAllTurnos(){
+        return ResponseEntity.ok(service.buscarTodos());
     }
 }

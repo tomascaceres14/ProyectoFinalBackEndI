@@ -18,20 +18,8 @@ public class DomicilioService implements IService<Domicilio> {
     private DomicilioRepository repository;
     @Override
     public String guardar(Domicilio object) {
-        if (repository.save(object) != null){
-            return "Se ha guardado el domicilio exitosamente";
-        } else return null;
-    }
-
-    @Override
-    public String eliminar(Long id) {
-        if(repository.findById(id).isPresent()){
-            String calle = repository.getReferenceById(id).getCalle();
-            String numero = repository.getReferenceById(id).getNumero();
-            repository.deleteById(id);
-            return "Domicilio id: "  + calle + " " + numero + " + id: " + id + "  ha sido eliminado.";
-        }
-        return "Domicilio id: " + id + " no ha sido encontrado.";
+        repository.save(object);
+        return "Se ha guardado el domicilio exitosamente";
     }
 
     @Override
@@ -39,7 +27,7 @@ public class DomicilioService implements IService<Domicilio> {
 
         Domicilio domicilio = null;
         if(repository.findById(id).isPresent()){
-            domicilio = repository.getReferenceById(id);
+            domicilio = repository.findById(id).get();
         }
 
         return domicilio;
@@ -52,7 +40,7 @@ public class DomicilioService implements IService<Domicilio> {
 
         if(repository.findById(id).isPresent()) {
 
-            Domicilio odontologoAct = repository.getReferenceById(id);
+            Domicilio odontologoAct = repository.findById(id).get();
             odontologoAct.setCalle(object.getCalle() != null ?  object.getCalle() : odontologoAct.getCalle());
             odontologoAct.setNumero(object.getNumero() != null ?  object.getNumero() : odontologoAct.getNumero());
             odontologoAct.setLocalidad(object.getLocalidad() != null ?  object.getLocalidad() : odontologoAct.getLocalidad());
@@ -63,6 +51,17 @@ public class DomicilioService implements IService<Domicilio> {
         }
 
         return respuesta;
+    }
+
+    @Override
+    public String eliminar(Long id) {
+        if(repository.findById(id).isPresent()){
+            String calle = repository.findById(id).get().getCalle();
+            String numero = repository.findById(id).get().getNumero();
+            repository.deleteById(id);
+            return "Domicilio id: "  + calle + " " + numero + " + id: " + id + "  ha sido eliminado.";
+        }
+        return "Domicilio id: " + id + " no ha sido encontrado.";
     }
 
     @Override
