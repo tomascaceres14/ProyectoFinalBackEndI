@@ -12,11 +12,11 @@ public class Turno {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "turno_sequence")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "odontologo_id")
     private Odontologo odontologo;
 

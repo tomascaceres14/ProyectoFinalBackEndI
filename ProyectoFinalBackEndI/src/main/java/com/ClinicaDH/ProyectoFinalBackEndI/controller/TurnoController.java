@@ -18,7 +18,7 @@ public class TurnoController {
     public TurnoService service;
 
     @PostMapping("/crear")
-    public ResponseEntity<String> postOdontologo(@RequestBody Turno t){
+    public ResponseEntity<String> postTurno(@RequestBody Turno t){
 
         ResponseEntity<String> respuesta = null;
 
@@ -31,17 +31,17 @@ public class TurnoController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Turno> getOdontologo(@PathVariable Long id){
+    public ResponseEntity<Turno> getTurno(@PathVariable Long id){
         return ResponseEntity.ok(service.buscar(id));
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Turno> updateTurnos(@PathVariable Long id, @RequestBody Turno t){
+    public ResponseEntity<Turno> updateTurno(@PathVariable Long id, @RequestBody Turno t){
         return ResponseEntity.ok(service.actualizar(id, t));
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> deleteTurnos(@PathVariable Long id){
+    public ResponseEntity<String> deleteTurno(@PathVariable Long id){
         return ResponseEntity.ok(service.eliminar(id));
     }
 

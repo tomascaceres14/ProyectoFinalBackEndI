@@ -42,33 +42,33 @@ class PacienteControllerTest {
     @Order(2)
     public void updatePaciente(){
 
-        // Nuevo domicilio a actualizar
-        Domicilio domicilio1 = new Domicilio("9 de Julio", "1044", "Mendoza", "Mendoza");
-        // Esta instancia de domicilio hace referencia a cuando se pasa solo el id en el body, para actualizar el domicilio
-        // de un paciente con uno ya existente.
-        Domicilio domicilio2 = new Domicilio(2L, null, null, null, null);
-
         // Obtengo instancias actuales de bbdd
         Paciente paciente1 = controller.getPaciente(1L).getBody();
         Paciente paciente2 = controller.getPaciente(2L).getBody();
 
-        // Creo instancias de odontologo con atributos que quiero actualizar
-        Paciente odontologo1_0 = new Paciente(1L,"Maria", "Arjona", "99887766", new Date(), domicilio1);
-        Paciente odontologo2_0 = new Paciente(2L, null, null, null, null, domicilio2);
+        // Nuevo domicilio para paciente1
+        Domicilio domicilio1Act = new Domicilio("9 de Julio", "1044", "Mendoza", "Mendoza");
+
+        // Actualizacion del domicilio para paciente2. Pasamos solamente el id del domicilio existente que queremos asignar.
+        Domicilio domicilio2Act = new Domicilio(2L, null, null, null, null);
+
+
+        // Cambios a realizar en pacientes.
+        Paciente pacienteAct1 = new Paciente(1L,"Maria", "Arjona", "99887766", new Date(), domicilio1Act);
+        Paciente pacienteAct2 = new Paciente(2L, null, null, null, null, domicilio2Act);
 
         // Actualizo
-        controller.updatePaciente(1L, odontologo1_0);
-        controller.updatePaciente(2L, odontologo2_0);
+        controller.updatePaciente(1L, pacienteAct1);
+        controller.updatePaciente(2L, pacienteAct2);
 
-        // Nuevos
+        // Pacientes actualizados
         Paciente newPac1 = controller.getPaciente(1L).getBody();
         Paciente newPac2 = controller.getPaciente(2L).getBody();
 
-        // Verifico que paciente 1 actualizado sea distinto al que el que creamos antes
+        // Verifico que el paciente1 anterior sea distinto al paciente1 actual
         Assertions.assertNotEquals(paciente1, newPac1);
 
-        // Verifico que paciente 2 actualizado tenga la misma matricula pero diferente apellido ya que
-        // solo se actualizo dicho atributo
+        // Verifico que paciente2 anterior tenga la misma matricula pero diferente apellido que el paciente2 actual (ya que solo se actualizo dicho atributo)
         Assertions.assertNotEquals(paciente2.getDomicilio(), newPac2.getDomicilio());
         Assertions.assertEquals(paciente2.getApellido(), newPac2.getApellido());
 

@@ -51,11 +51,10 @@ class OdontologoControllerTest {
 		Odontologo newOdon1 = controller.getOdontologo(1L).getBody();
 		Odontologo newOdon2 = controller.getOdontologo(2L).getBody();
 
-		// Verifico que odontologo 1 actualizado sea igual que el que creamos antes
-		Assertions.assertNotEquals(odontologo1.getNombre(), newOdon1.getNombre());
+		// Verifico que el anterior odontologo sea distinto al actualizado
+		Assertions.assertNotEquals(odontologo1, newOdon1);
 
-		// Verifico que odontologo 2 actualizado tenga la misma matricula pero diferente apellido ya que
-		// solo se actualizo dicho atributo
+		// Verifico que el segundo odontologo haya actualizado solamente la matricula
 		Assertions.assertNotEquals(odontologo2.getMatricula(), newOdon2.getMatricula());
 		Assertions.assertEquals(odontologo2.getApellido(), newOdon2.getApellido());
 
