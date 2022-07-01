@@ -27,7 +27,7 @@ class TurnosControllerTest {
     @Test
     @Order(1)
     public void cargaPacientesYOdontologos(){
-
+        // El controller de turnos no crea pacientes nuevos, sino que utiliza los que ya existan en la base de datos
         // Creo instancias a insertar en bbdd
         Domicilio domicilio1 = new Domicilio("Calle Falsa", "123", "Rafaela", "Santa Fe");
         Domicilio domicilio2 = new Domicilio("Benitez", "321", "La Plata", "Buenos Aires");
