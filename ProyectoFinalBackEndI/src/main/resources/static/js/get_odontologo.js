@@ -1,41 +1,39 @@
-window.addEventListener('load', function () {
+$(document).ready(function(){
     (function(){
-
-      //con fetch invocamos a la API de odontologos con el método GET
-      //nos devolverá un JSON con una colección de odontologos
-      const url = '/odontologos';
-      const settings = {
-        method: 'GET'
-      }
-
-      fetch(url,settings)
-      .then(response => response.json())
-      .then(data => {
-      //recorremos la colección de odontologos del JSON
-         for(odontologo of data){
-            //por cada odontologo armaremos una fila de la tabla
-            //cada fila tendrá un id
-            var table = document.getElementById("odontologoTable");
-            var odontologoRow =table.insertRow();
-            let tr_id = 'tr_' + odontologo.id;
-            odontologoRow.id = tr_id;
+        $.ajax({
+            type : "GET",
+            url : "/odontologos/crear",
+            success: function(response){
+              $.each(response, (i, odontologo) => {  
 
 
-            //armamos cada columna de la fila
-            odontologoRow.innerHTML = '<td class=\"td_nombre\">' + odontologo.nombre.toUpperCase() + '</td>' +
-                    '<td class=\"td_apellido\">' + odontologo.apellido.toUpperCase() + '</td>';
-
-        };
-
-    })
-    })
-
+                let get_More_Info_Btn = '<button' +
+                                            ' id=' + '\"' + 'btn_id_' + odontologo.id + '\"' +
+                                            ' type="button" class="btn btn-info btn_id">' + 
+                                            odontologo.id +
+                                            '</button>';
+                
+                let tr_id = 'tr_' + odontologo.id;
+                let odontologoRow = '<tr id=\"' + tr_id + "\"" + '>' +
+                          '<td>' + get_More_Info_Btn + '</td>' +
+                          '<td class=\"td_first_name\">' + odontologo.nombre.toUpperCase() + '</td>' +
+                          '<td class=\"td_last_name\">' + odontologo.apellido + '</td>' +
+                          '<td class=\"td_matricula\">' + odontologo.matricula + '</td>' +
+                          '</tr>';                
+                $('#odontologoTable tbody').append(odontologoRow);
+              });
+            },
+            error : function(e) {
+              alert("ERROR: ", e);
+              console.log("ERROR: ", e);
+            }
+        });
+    })();        
+    
     (function(){
-      let pathname = window.location.pathname;
-      if (pathname == "/odontologoList.html") {
-          document.querySelector(".nav .nav-item a:last").addClass("active");
-      }
-    })
-
-
-    })
+        let pathname = window.location.pathname;
+        if (pathname == "/odontologos.html") {
+            $(".nav .nav-item a:last").addClass("active");
+        }
+    })();
+});
