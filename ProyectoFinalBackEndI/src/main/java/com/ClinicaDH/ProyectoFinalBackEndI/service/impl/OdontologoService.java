@@ -10,13 +10,14 @@ import java.util.List;
 
 // Implementacion del servicio. Aca trabajamos la logica del manejo de datos. Nuestro objetivo no es mas que el desarrollo del CRUD.
 
+
 @Service
 public class OdontologoService implements IService<Odontologo> {
     // Anotacion Autowired genera la inyeccion de la dependencia OdontologoRepository para acceder a los metodos.
     @Autowired
     OdontologoRepository repository;
-    @Autowired
-    Logger logger;
+
+    final static Logger logger = Logger.getLogger(OdontologoService.class);
 
     @Override
     public Odontologo guardar(Odontologo object) {

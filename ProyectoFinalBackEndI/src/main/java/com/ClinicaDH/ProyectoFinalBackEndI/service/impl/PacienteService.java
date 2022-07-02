@@ -18,8 +18,8 @@ public class PacienteService implements IService<Paciente> {
     // Ya que el Paciente tiene un Domicilio como atributo vamos a necesitar el Service del mismo para controlarlo.
     @Autowired
     private DomicilioService domicilioService;
-    @Autowired
-    Logger logger;
+
+    final static Logger logger = Logger.getLogger(OdontologoService.class);
 
     @Override
     public Paciente guardar(Paciente object) {

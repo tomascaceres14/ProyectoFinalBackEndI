@@ -12,8 +12,8 @@ import java.util.List;
 public class DomicilioService implements IService<Domicilio> {
     @Autowired
     private DomicilioRepository repository;
-    @Autowired
-    Logger logger;
+
+    final static Logger logger = Logger.getLogger(OdontologoService.class);
     @Override
     public Domicilio guardar(Domicilio object) {
         logger.debug("Guardando domicilio nuevo");

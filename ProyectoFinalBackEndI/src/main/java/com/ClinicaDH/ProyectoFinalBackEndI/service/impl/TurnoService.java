@@ -19,8 +19,8 @@ public class TurnoService implements IService<Turno> {
     private PacienteService pacienteService;
     @Autowired
     private OdontologoService odontologoService;
-    @Autowired
-    Logger logger;
+
+    final static Logger logger = Logger.getLogger(OdontologoService.class);
 
     @Override
     public Turno guardar(Turno object) {
