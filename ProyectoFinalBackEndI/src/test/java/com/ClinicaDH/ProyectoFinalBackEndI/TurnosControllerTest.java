@@ -3,6 +3,7 @@ package com.ClinicaDH.ProyectoFinalBackEndI;
 import com.ClinicaDH.ProyectoFinalBackEndI.controller.OdontologoController;
 import com.ClinicaDH.ProyectoFinalBackEndI.controller.PacienteController;
 import com.ClinicaDH.ProyectoFinalBackEndI.controller.TurnoController;
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Domicilio;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Paciente;
@@ -49,7 +50,7 @@ class TurnosControllerTest {
 
     @Test
     @Order(2)
-    public void postYGetTurno(){
+    public void postYGetTurno() throws ResourceNotFoundException {
 
         Paciente paciente1 = controllerP.getPaciente(1L).getBody();
 
@@ -67,7 +68,7 @@ class TurnosControllerTest {
 
     @Test
     @Order(3)
-    public void updateTurno(){
+    public void updateTurno() throws ResourceNotFoundException{
 
         // Obtengo instancia actual de bbdd
         Turno turno = controller.getTurno(1L).getBody();

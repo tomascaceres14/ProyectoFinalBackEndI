@@ -1,5 +1,6 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.service.impl;
 
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.repository.OdontologoRepository;
 import com.ClinicaDH.ProyectoFinalBackEndI.service.IService;
@@ -28,9 +29,11 @@ public class OdontologoService implements IService<Odontologo> {
     }
 
     @Override
-    public Odontologo buscar(Long id) {
+    public Odontologo buscar(Long id) throws ResourceNotFoundException {
         Odontologo odontologo = null;
-        if(repository.findById(id).isPresent()){
+        if(!repository.findById(id).isPresent()){
+            throw new ResourceNotFoundException("No existe ningún odontólogo con id: "+id);}
+        else {
             odontologo = repository.findById(id).get();
         }
 
@@ -58,14 +61,17 @@ public class OdontologoService implements IService<Odontologo> {
     }
 
     @Override
-    public String eliminar(Long id) {
-        if(repository.findById(id).isPresent()){
+    public String eliminar(Long id) throws ResourceNotFoundException {
+        if(!repository.findById(id).isPresent()){
+            throw new ResourceNotFoundException("No existe ningún odontólogo con id: "+id);
+
+        }
+        else {
             String odontologoNombre = repository.findById(id).get().getNombre();
             String odontologoApellido = repository.findById(id).get().getApellido();
             repository.deleteById(id);
             return "Odontologo id: " + id + ", nombre: " + odontologoNombre + " " + odontologoApellido + " fué eliminado.";
         }
-        return "Odontologo id: " + id + " no fué encontrado.";
     }
 
     @Override

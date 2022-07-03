@@ -1,5 +1,6 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.controller;
 
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Turno;
 import com.ClinicaDH.ProyectoFinalBackEndI.service.impl.TurnoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class TurnoController {
     public TurnoService service;
 
     @PostMapping("/crear")
-    public ResponseEntity<String> postTurno(@RequestBody Turno t){
+    public ResponseEntity<String> postTurno(@RequestBody Turno t) throws ResourceNotFoundException{
 
         ResponseEntity<String> respuesta = null;
 
@@ -34,7 +35,7 @@ public class TurnoController {
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Turno> updateTurno(@PathVariable Long id, @RequestBody Turno t){
+    public ResponseEntity<Turno> updateTurno(@PathVariable Long id, @RequestBody Turno t) throws ResourceNotFoundException {
         return ResponseEntity.ok(service.actualizar(id, t));
     }
 

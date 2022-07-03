@@ -1,10 +1,11 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.controller;
 
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import com.ClinicaDH.ProyectoFinalBackEndI.service.impl.OdontologoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -27,8 +28,8 @@ public class OdontologoController {
     public ResponseEntity<Odontologo> postOdontologo(@RequestBody Odontologo o){
         return ResponseEntity.ok(service.guardar(o));
     }
-    @GetMapping("{id}")
-    public ResponseEntity<Odontologo> getOdontologo(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<Odontologo> getOdontologo(@PathVariable Long id) throws ResourceNotFoundException{
         return ResponseEntity.ok(service.buscar(id));
     }
 
@@ -38,7 +39,7 @@ public class OdontologoController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> deleteOdontologo(@PathVariable Long id){
+    public ResponseEntity<String> deleteOdontologo(@PathVariable Long id) throws ResourceNotFoundException{
         return ResponseEntity.ok(service.eliminar(id));
     }
 
@@ -46,4 +47,6 @@ public class OdontologoController {
     public ResponseEntity<List<Odontologo>> getAllOdontologos(){
         return ResponseEntity.ok(service.buscarTodos());
     }
+
+
 }

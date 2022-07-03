@@ -1,6 +1,7 @@
 package com.ClinicaDH.ProyectoFinalBackEndI;
 
 import com.ClinicaDH.ProyectoFinalBackEndI.controller.OdontologoController;
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ class OdontologoControllerTest {
 
 	@Test
 	@Order(1)
-	public void postYGetOdontologo(){
+	public void postYGetOdontologo() throws ResourceNotFoundException {
 
 		// Creo instancias de nuevos odontologos a insertar en bbdd
 		Odontologo odontologo1 = new Odontologo("Hernan", "Cassina", 1337);
@@ -33,7 +34,7 @@ class OdontologoControllerTest {
 
 	@Test
 	@Order(2)
-	public void updateOdontologo(){
+	public void updateOdontologo() throws ResourceNotFoundException{
 
 		// Obtengo instancias actuales de bbdd
 		Odontologo odontologo1 = controller.getOdontologo(1L).getBody();
@@ -62,7 +63,7 @@ class OdontologoControllerTest {
 
 	@Test
 	@Order(3)
-	public void deleteOdontologo(){
+	public void deleteOdontologo() throws ResourceNotFoundException{
 
 		// Obtengo instancias de la base de datos de odontologos creados anteriormente
 		Odontologo odontologo1 = controller.getOdontologo(1L).getBody();

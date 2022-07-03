@@ -1,5 +1,6 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.service.impl;
 
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Paciente;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Turno;
@@ -23,7 +24,7 @@ public class TurnoService implements IService<Turno> {
     final static Logger logger = Logger.getLogger(OdontologoService.class);
 
     @Override
-    public Turno guardar(Turno object) {
+    public Turno guardar(Turno object) throws ResourceNotFoundException {
         logger.info("Guardando turno nuevo");
         logger.debug("Buscando ids de paciene y odontologo");
         Long pacienteId = object.getPaciente().getId();
@@ -49,7 +50,7 @@ public class TurnoService implements IService<Turno> {
     }
 
     @Override
-    public Turno actualizar(Long id, Turno object) {
+    public Turno actualizar(Long id, Turno object) throws ResourceNotFoundException{
 
         Turno respuesta = null;
 

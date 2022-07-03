@@ -1,5 +1,6 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.service;
 
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import org.springframework.stereotype.Service;
 
@@ -10,13 +11,13 @@ import java.util.List;
 
 public interface IService<T> {
 
-    public T guardar(T object);
+    public T guardar(T object) throws ResourceNotFoundException;
 
-    public String eliminar(Long id);
+    public String eliminar(Long id) throws ResourceNotFoundException;
 
-    public T buscar(Long id);
+    public T buscar(Long id) throws ResourceNotFoundException;
 
-    public T actualizar(Long id, T object);
+    public T actualizar(Long id, T object) throws ResourceNotFoundException;
 
     public List<T> buscarTodos();
 
