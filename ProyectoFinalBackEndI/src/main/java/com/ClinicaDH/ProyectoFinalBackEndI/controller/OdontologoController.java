@@ -1,4 +1,5 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.controller;
+
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import com.ClinicaDH.ProyectoFinalBackEndI.service.impl.OdontologoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +24,8 @@ public class OdontologoController {
     // cambia el tipo de peticion que maneja.
 
     @PostMapping("/crear")
-    public ResponseEntity<String> postOdontologo(@RequestBody Odontologo o){
-        ResponseEntity<String> respuesta = null;
-
-        if(service.guardar(o) != null){
-            respuesta = ResponseEntity.ok("El odontologo fue registrado con éxito");
-        }else{
-            respuesta = ResponseEntity.internalServerError().body("Ooops");
-        }
-        return respuesta;
+    public ResponseEntity<Odontologo> postOdontologo(@RequestBody Odontologo o){
+        return ResponseEntity.ok(service.guardar(o));
     }
     @GetMapping("{id}")
     public ResponseEntity<Odontologo> getOdontologo(@PathVariable Long id){

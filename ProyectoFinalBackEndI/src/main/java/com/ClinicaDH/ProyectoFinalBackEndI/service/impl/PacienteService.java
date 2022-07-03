@@ -4,6 +4,7 @@ import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Domicilio;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Paciente;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.repository.PacienteRepository;
 import com.ClinicaDH.ProyectoFinalBackEndI.service.IService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,33 +15,35 @@ public class PacienteService implements IService<Paciente> {
 
     @Autowired
     private PacienteRepository repository;
-
     // Ya que el Paciente tiene un Domicilio como atributo vamos a necesitar el Service del mismo para controlarlo.
     @Autowired
     private DomicilioService domicilioService;
 
-    @Override
-    public String guardar(Paciente object) {
+    final static Logger logger = Logger.getLogger(OdontologoService.class);
 
+    @Override
+    public Paciente guardar(Paciente object) {
+        logger.info("Guardando paciente " + object.getApellido());
         // Aca, a diferencia del OdontologoService, no solo tenemos que guardar un objeto de tipo Paciente sino que
         // tambien uno de tipo Domicilio ya que es donde reside el mismo. Para eso, implementamos la siguiente logica:
         // Si el Body del POST, dentro de Domicilio lleva un id, significa que el domicilio ya existe y queremos conectarlo
         // con el mismo. Si id es nulo, es porque nos estan pasando el objeto de tipo Domicilio, por lo que tendremos
         // que generar un nuevo registro.
-
-        String respuesta = "";
         Long domicilioId = object.getDomicilio().getId();
-
         if( domicilioId != null){
+            logger.info("Guardando paciente con domicilio existente");
+            logger.debug("Obteniendo id de domicilio");
             Domicilio domicilio = domicilioService.buscar(domicilioId);
+            logger.debug("Asignando domicilio a paciente");
             object.setDomicilio(domicilio);
             repository.save(object);
-            respuesta = "Se ha guardado el paciente con domicilio existente";
+            logger.info("Se ha guardado el paciente con domicilio existente");
         } else {
+            logger.debug("Guardando paciente con domicilio nuevo");
             repository.save(object);
-            respuesta = "Se ha guardado el paciente con domicilio nuevo";
+            logger.info("Se ha guardado el paciente con domicilio nuevo");
         }
-        return respuesta;
+        return object;
     }
 
     @Override

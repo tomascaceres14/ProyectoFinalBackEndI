@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface IService<T> {
 
-    public String guardar(T object);
+    public T guardar(T object);
 
     public String eliminar(Long id);
 

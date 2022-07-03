@@ -1,15 +1,13 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.service.impl;
 
-import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Domicilio;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Paciente;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Turno;
-import com.ClinicaDH.ProyectoFinalBackEndI.persistance.repository.OdontologoRepository;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.repository.TurnoRepository;
 import com.ClinicaDH.ProyectoFinalBackEndI.service.IService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -22,17 +20,23 @@ public class TurnoService implements IService<Turno> {
     @Autowired
     private OdontologoService odontologoService;
 
-    @Override
-    public String guardar(Turno object) {
+    final static Logger logger = Logger.getLogger(OdontologoService.class);
 
+    @Override
+    public Turno guardar(Turno object) {
+        logger.info("Guardando turno nuevo");
+        logger.debug("Buscando ids de paciene y odontologo");
         Long pacienteId = object.getPaciente().getId();
         Long odontologoId = object.getOdontologo().getId();
 
+        logger.debug("Asignando paciente y odontologo al turno");
         object.setOdontologo(odontologoService.buscar(odontologoId));
         object.setPaciente(pacienteService.buscar(pacienteId));
 
+        logger.debug("Cargando turno en base de datos");
         repository.save(object);
-        return "Se ha guardado el turno exitosamente";
+        logger.info("Se ha guardado el turno exitosamente");
+        return object;
     }
 
     @Override
