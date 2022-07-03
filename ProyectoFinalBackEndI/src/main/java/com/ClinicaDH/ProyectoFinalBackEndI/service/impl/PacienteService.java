@@ -1,5 +1,6 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.service.impl;
 
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Domicilio;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Paciente;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.repository.PacienteRepository;
@@ -47,23 +48,20 @@ public class PacienteService implements IService<Paciente> {
     }
 
     @Override
-    public Paciente buscar(Long id) {
+    public Paciente buscar(Long id) throws ResourceNotFoundException {
 
-        Paciente paciente = null;
-        if(repository.findById(id).isPresent()) {
-            paciente = repository.findById(id).get();
+        if(!repository.findById(id).isPresent()) {
+            throw new ResourceNotFoundException("No se puede actualizar, no existe un paciente con id: " + id);}
+        else {
+            return repository.findById(id).get();
         }
-        return paciente;
-
     }
 
     @Override
-    public Paciente actualizar(Long id, Paciente object) {
-
-        Paciente respuesta = null;
-
-        if(repository.findById(id).isPresent()) {
-
+    public Paciente actualizar(Long id, Paciente object) throws ResourceNotFoundException{
+        if(!repository.findById(id).isPresent()) {
+            throw new ResourceNotFoundException("No existe un paciente con id: " + id);}
+        else {
             Paciente pacienteAct = repository.findById(id).get();
             pacienteAct.setNombre(object.getNombre() != null ?  object.getNombre() : pacienteAct.getNombre());
             pacienteAct.setApellido(object.getApellido() != null ?  object.getApellido() : pacienteAct.getApellido());
@@ -72,23 +70,22 @@ public class PacienteService implements IService<Paciente> {
             pacienteAct.setDomicilio(object.getDomicilio() != null ?  domicilioService.actualizar(pacienteAct.getDomicilio().getId(), object.getDomicilio()) : pacienteAct.getDomicilio());
             pacienteAct.setFechaIngreso(object.getFechaIngreso() != null ?  object.getFechaIngreso() : pacienteAct.getFechaIngreso());
 
-            repository.save(pacienteAct);
-
-            respuesta = pacienteAct;
+            return repository.save(pacienteAct);
         }
 
-        return respuesta;
+
     }
 
     @Override
-    public String eliminar(Long id) {
-        if(repository.findById(id).isPresent()){
+    public String eliminar(Long id) throws ResourceNotFoundException{
+        if(!repository.findById(id).isPresent()){
+            throw new ResourceNotFoundException("No existe un paciente con id: " + id);}
+        else{
             String nombre = repository.findById(id).get().getNombre();
             String apellido = repository.findById(id).get().getApellido();
             repository.deleteById(id);
             return "Paciente " + nombre + " " + apellido + ", id: " + id + " ha sido eliminado.";
         }
-        return "Paciente id: " + id + " no fué encontrado.";
     }
 
     @Override

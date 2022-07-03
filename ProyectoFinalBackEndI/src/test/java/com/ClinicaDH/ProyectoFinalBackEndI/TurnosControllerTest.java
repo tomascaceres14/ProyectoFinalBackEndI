@@ -95,7 +95,7 @@ class TurnosControllerTest {
 
     @Test
     @Order(4)
-    public void deleteTurno(){
+    public void deleteTurno() throws ResourceNotFoundException{
 
         // Obtengo turno existente
         Turno turno = controller.getTurno(1L).getBody();

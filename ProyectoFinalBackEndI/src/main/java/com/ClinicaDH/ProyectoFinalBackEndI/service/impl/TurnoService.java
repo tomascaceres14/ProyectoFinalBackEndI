@@ -41,20 +41,21 @@ public class TurnoService implements IService<Turno> {
     }
 
     @Override
-    public Turno buscar(Long id) {
-        Turno turno = null;
-        if(repository.findById(id).isPresent()) {
-            turno = repository.findById(id).get();
+    public Turno buscar(Long id) throws ResourceNotFoundException{
+        if(!repository.findById(id).isPresent()) {
+            throw new ResourceNotFoundException("No se encontró ningún turno con id: " + id);
         }
-        return turno;
+        else {
+            return repository.findById(id).get();
+        }
     }
 
     @Override
     public Turno actualizar(Long id, Turno object) throws ResourceNotFoundException{
 
-        Turno respuesta = null;
-
-        if(repository.findById(id).isPresent()) {
+        if(!repository.findById(id).isPresent()) {
+            throw new ResourceNotFoundException("No se encontró ningún turno con id: " + id);}
+        else {
 
             Turno turnoAct = repository.findById(id).get();
 
@@ -70,20 +71,19 @@ public class TurnoService implements IService<Turno> {
 
             repository.save(turnoAct);
 
-            respuesta = turnoAct;
+            return turnoAct;
         }
 
-        return respuesta;
     }
 
     @Override
-    public String eliminar(Long id) {
-        if(repository.findById(id).isPresent()){
-
+    public String eliminar(Long id) throws ResourceNotFoundException{
+        if(!repository.findById(id).isPresent()){
+            throw new ResourceNotFoundException("No se encontró ningún turno con id: " + id);}
+        else {
             repository.deleteById(id);
             return "Turno id: " + id + " ha sido eliminado.";
         }
-        return "Turno id: " + id + " no ha sido encontrado.";
     }
 
     @Override

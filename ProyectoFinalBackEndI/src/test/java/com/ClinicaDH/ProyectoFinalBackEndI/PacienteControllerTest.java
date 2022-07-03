@@ -1,6 +1,7 @@
 package com.ClinicaDH.ProyectoFinalBackEndI;
 
 import com.ClinicaDH.ProyectoFinalBackEndI.controller.PacienteController;
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Domicilio;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Paciente;
 import org.junit.jupiter.api.*;
@@ -17,7 +18,7 @@ class PacienteControllerTest {
 
     @Test
     @Order(1)
-    public void postYGetPaciente(){
+    public void postYGetPaciente() throws ResourceNotFoundException {
 
         // Creo instancias de nuevos domicilios a insertar en bbdd
         Domicilio domicilio1 = new Domicilio("Calle Falsa", "123", "Rafaela", "Santa Fe");
@@ -40,7 +41,7 @@ class PacienteControllerTest {
 
     @Test
     @Order(2)
-    public void updatePaciente(){
+    public void updatePaciente() throws ResourceNotFoundException {
 
         // Obtengo instancias actuales de bbdd
         Paciente paciente1 = controller.getPaciente(1L).getBody();
@@ -76,7 +77,7 @@ class PacienteControllerTest {
 
     @Test
     @Order(3)
-    public void deletePaciente(){
+    public void deletePaciente() throws ResourceNotFoundException {
 
         // Obtengo instancias de la base de datos de odontologos creados anteriormente
         Paciente odontologo1 = controller.getPaciente(1L).getBody();

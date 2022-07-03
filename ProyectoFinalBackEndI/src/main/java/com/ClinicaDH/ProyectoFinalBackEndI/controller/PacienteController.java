@@ -1,5 +1,6 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.controller;
 
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Paciente;
 import com.ClinicaDH.ProyectoFinalBackEndI.service.impl.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,18 +27,18 @@ public class PacienteController {
         }
         return respuesta;
     }
-    @GetMapping("{id}")
-    public ResponseEntity<Paciente> getPaciente(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<Paciente> getPaciente(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(service.buscar(id));
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Paciente> updatePaciente(@PathVariable Long id, @RequestBody Paciente p){
+    public ResponseEntity<Paciente> updatePaciente(@PathVariable Long id, @RequestBody Paciente p) throws ResourceNotFoundException {
         return ResponseEntity.ok(service.actualizar(id, p));
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> deletePaciente(@PathVariable Long id){
+    public ResponseEntity<String> deletePaciente(@PathVariable Long id) throws ResourceNotFoundException{
         return ResponseEntity.ok(service.eliminar(id));
     }
 

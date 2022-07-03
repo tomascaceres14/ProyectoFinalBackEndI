@@ -42,22 +42,21 @@ public class OdontologoService implements IService<Odontologo> {
     }
 
     @Override
-    public Odontologo actualizar(Long id, Odontologo object) {
+    public Odontologo actualizar(Long id, Odontologo object) throws ResourceNotFoundException  {
 
-        Odontologo respuesta = null;
+        if(!repository.findById(id).isPresent()) {
 
-        if(repository.findById(id).isPresent()) {
-
+                throw new ResourceNotFoundException("No se puede actualizar, no existe ningún odontólogo con id: "+id);}
+        else {
             Odontologo odontologoAct = repository.findById(id).get();
             odontologoAct.setNombre(object.getNombre() != null ?  object.getNombre() : odontologoAct.getNombre());
             odontologoAct.setApellido(object.getApellido() != null ?  object.getApellido() : odontologoAct.getApellido());
             odontologoAct.setMatricula(object.getMatricula() != null ?  object.getMatricula() : odontologoAct.getMatricula());
             repository.save(odontologoAct);
 
-            respuesta = odontologoAct;
+            return odontologoAct;
         }
 
-        return respuesta;
     }
 
     @Override

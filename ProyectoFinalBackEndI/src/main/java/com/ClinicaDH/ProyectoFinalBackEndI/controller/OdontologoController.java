@@ -34,7 +34,7 @@ public class OdontologoController {
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Odontologo> updateOdontologo(@PathVariable Long id, @RequestBody Odontologo o){
+    public ResponseEntity<Odontologo> updateOdontologo(@PathVariable Long id, @RequestBody Odontologo o) throws ResourceNotFoundException{
         return ResponseEntity.ok(service.actualizar(id, o));
     }
 
