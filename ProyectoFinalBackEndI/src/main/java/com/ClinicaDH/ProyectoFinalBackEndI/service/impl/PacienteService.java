@@ -37,12 +37,12 @@ public class PacienteService implements IService<Paciente> {
             logger.debug("Asignando domicilio a paciente");
             object.setDomicilio(domicilio);
             repository.save(object);
-            logger.info("Se ha guardado el paciente con domicilio existente");
         } else {
             logger.debug("Guardando paciente con domicilio nuevo");
             repository.save(object);
-            logger.info("Se ha guardado el paciente con domicilio nuevo");
+
         }
+        logger.info("Se ha guardado el paciente");
         return object;
     }
 
