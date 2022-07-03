@@ -8,6 +8,8 @@ $(document).ready(function() {
             matricula: $("#matricula").val(),
         }
 
+        console.log(formData);
+
         $.ajax({
             url: '/odontologos/crear',
             type: 'POST',

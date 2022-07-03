@@ -11,7 +11,7 @@ import java.util.List;
 // lo declaramos con el @RequestMapping, donde indicamos cual sera el endpoint padre y luego dependiendo el metodo requerido
 // alternamos la anotacion indicando que metodo de la clase se reserva al conjunto endpoint+peticion.
 
-@Controller
+@RestController
 @RequestMapping("/odontologos")
 public class OdontologoController {
 
