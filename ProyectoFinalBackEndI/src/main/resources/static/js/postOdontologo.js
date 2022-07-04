@@ -7,7 +7,6 @@ window.addEventListener('load', function () {
 
 
     formulario.addEventListener('submit', function (event) {
-        event.preventDefault();
         const data = {
             nombre: inputNombre.value,
             apellido: inputApellido.value,
