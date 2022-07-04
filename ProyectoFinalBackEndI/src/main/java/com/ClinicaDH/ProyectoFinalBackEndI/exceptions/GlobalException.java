@@ -12,4 +12,10 @@ public class GlobalException{
     public ResponseEntity<String> procesarErrorNotFound(ResourceNotFoundException ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
+
+    @ExceptionHandler({BadRequestException.class})
+    public ResponseEntity<String> procesarErrorBadRequest(BadRequestException ex){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.persistance.models;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity

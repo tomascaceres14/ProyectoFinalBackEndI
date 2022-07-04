@@ -3,6 +3,7 @@ package com.ClinicaDH.ProyectoFinalBackEndI;
 import com.ClinicaDH.ProyectoFinalBackEndI.controller.OdontologoController;
 import com.ClinicaDH.ProyectoFinalBackEndI.controller.PacienteController;
 import com.ClinicaDH.ProyectoFinalBackEndI.controller.TurnoController;
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.BadRequestException;
 import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Domicilio;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
@@ -50,7 +51,7 @@ class TurnosControllerTest {
 
     @Test
     @Order(2)
-    public void postYGetTurno() throws ResourceNotFoundException {
+    public void postYGetTurno() throws ResourceNotFoundException, BadRequestException {
 
         Paciente paciente1 = controllerP.getPaciente(1L).getBody();
 

@@ -1,5 +1,6 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.service.impl;
 
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.BadRequestException;
 import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Paciente;
@@ -9,6 +10,9 @@ import com.ClinicaDH.ProyectoFinalBackEndI.service.IService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,20 +28,28 @@ public class TurnoService implements IService<Turno> {
     final static Logger logger = Logger.getLogger(OdontologoService.class);
 
     @Override
-    public Turno guardar(Turno object) throws ResourceNotFoundException {
-        logger.info("Guardando turno nuevo");
-        logger.debug("Buscando ids de paciene y odontologo");
-        Long pacienteId = object.getPaciente().getId();
-        Long odontologoId = object.getOdontologo().getId();
+    public Turno guardar(Turno object) throws ResourceNotFoundException, BadRequestException {
+        // Validamos que la fecha en la que se asigna el turno sea posterior a la fecha actual, para no
+        // asignar turnnos en el pasado
+        Date fechaActual = new Date(System.currentTimeMillis());
+        if (object.getFecha().compareTo(fechaActual) <= 0){
+            throw new BadRequestException("La fecha ingresada debe ser posterior a la fecha actual");
+        }
+        else {
+            logger.info("Guardando turno nuevo");
+            logger.debug("Buscando ids de paciene y odontologo");
+            Long pacienteId = object.getPaciente().getId();
+            Long odontologoId = object.getOdontologo().getId();
 
-        logger.debug("Asignando paciente y odontologo al turno");
-        object.setOdontologo(odontologoService.buscar(odontologoId));
-        object.setPaciente(pacienteService.buscar(pacienteId));
+            logger.debug("Asignando paciente y odontologo al turno");
+            object.setOdontologo(odontologoService.buscar(odontologoId));
+            object.setPaciente(pacienteService.buscar(pacienteId));
 
-        logger.debug("Cargando turno en base de datos");
-        repository.save(object);
-        logger.info("Se ha guardado el turno exitosamente");
-        return object;
+            logger.debug("Cargando turno en base de datos");
+            repository.save(object);
+            logger.info("Se ha guardado el turno exitosamente");
+            return object;
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.service;
 
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.BadRequestException;
 import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Odontologo;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public interface IService<T> {
 
-    public T guardar(T object) throws ResourceNotFoundException;
+    public T guardar(T object) throws ResourceNotFoundException, BadRequestException;
 
     public String eliminar(Long id) throws ResourceNotFoundException;
 

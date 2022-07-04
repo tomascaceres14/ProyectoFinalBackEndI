@@ -1,5 +1,6 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.controller;
 
+import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.BadRequestException;
 import com.ClinicaDH.ProyectoFinalBackEndI.exceptions.ResourceNotFoundException;
 import com.ClinicaDH.ProyectoFinalBackEndI.persistance.models.Turno;
 import com.ClinicaDH.ProyectoFinalBackEndI.service.impl.TurnoService;
@@ -17,7 +18,7 @@ public class TurnoController {
     public TurnoService service;
 
     @PostMapping("/crear")
-    public ResponseEntity<String> postTurno(@RequestBody Turno t) throws ResourceNotFoundException{
+    public ResponseEntity<String> postTurno(@RequestBody Turno t) throws ResourceNotFoundException, BadRequestException {
 
         ResponseEntity<String> respuesta = null;
 
