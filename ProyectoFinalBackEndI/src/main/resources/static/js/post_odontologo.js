@@ -1,56 +1,54 @@
-$(document).ready(function() {
-    $("#add_new_odontologo").submit(function(evt) {
-        evt.preventDefault();
-        
-        let formData = {
-            nombre : $("#nombre").val(),
-            apellido :  $("#apellido").val(),
-            matricula: $("#matricula").val(),
-        }
+window.addEventListener("load", function () {
+  const inputNombre = document.getElementById("nombre");
+  const inputApellido = document.getElementById("apellido");
+  const inputMatricula = document.getElementById("matricula");
+  const formulario = document.querySelector("form");
+  const responseDiv = document.getElementById("response");
 
-        $.ajax({
-            url: '/odontologos/crear',
-            type: 'POST',
-            contentType : "application/json",
-            data: JSON.stringify(formData),
-            dataType : 'json',
-            async: false,
-            cache: false,
-            success: function (response) {
-                let odontologo = response
-               console.log(response)
-                let successAlert = '<div class="alert alert-success alert-dismissible">' +
-                    '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                    '<strong></strong> odontologo agregado </div>'
-                $("#response").append(successAlert);
-                $("#response").css({"display": "block"});
+  function cartelRespuesta(data) {
+    let success =
+      '<div class="alert alert-success alert-dismissible">' +
+      '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+      '<strong>odontologo agregado</strong></div>';
+    let failure =
+      '<div class="alert alert-danger alert-dismissible">' +
+      '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+      '<strong> Error intente nuevamente</strong> </div>';
+    responseDiv.style.display = "block";
+    if (data != null) {
+      responseDiv.innerHTML = success;
+    } else responseDiv.innerHTML = failure;
+  }
 
-                resetUploadForm();
-            },
-            error: function (response) {
-                let errorAlert = '<div class="alert alert-danger alert-dismissible">' +
-                    '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                    '<strong> Error intente nuevamente</strong> </div>'
-                $("#response").append(errorAlert);
-                $("#response").css({"display": "block"});
+  function limpiarCampos() {
+    inputMatricula.value = "";
+    inputApellido.value = "";
+    inputNombre.value = "";
+  }
 
-                resetUploadForm();
-            }
-        });
-    });
+  formulario.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const data = {
+      nombre: inputNombre.value,
+      apellido: inputApellido.value,
+      matricula: inputMatricula.value,
+    };
 
-    function resetUploadForm(){
-        $("#nombre").val("");
-        $("#apellido").val("");
-        $("#matricula").val("");
-    }
+    const config = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-    (function(){
-        let pathname = window.location.pathname;
-        if(pathname === "/"){
-            $(".nav .nav-item a:first").addClass("active");
-        } else if (pathname == "/odontologos.html") {
-            $(".nav .nav-item a:last").addClass("active");
-        }
-    })();
+    fetch(`/odontologos/crear`, config)
+      .then((data) => data.json())
+      .then((data) => {
+        cartelRespuesta(data.id);
+        console.log(data);
+      });
+
+    limpiarCampos();
+  });
 });
