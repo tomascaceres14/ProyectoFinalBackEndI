@@ -5,19 +5,18 @@ $(document).ready(function(){
             let odontologoId = $("#odontologo_id").val();
             
         let formData = {
-            id: $("#odontologo_id").val(),
+
             nombre : $("#nombre").val(),
             apellido :  $("#apellido").val(),
             matricula: $("#matricula").val(),
         }
             
             $.ajax({
-                url: '/odontologos',
+                url: '/odontologos/actualizar/' + odontologoId,
                 type: 'PUT',
                 contentType : "application/json",
                 data: JSON.stringify(formData),
                 dataType : 'json',
-                async: false,
                 cache: false,
                 success: function (response) {
                     let odontologo = response;
