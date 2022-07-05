@@ -1,14 +1,12 @@
 package com.ClinicaDH.ProyectoFinalBackEndI.login.model;
 
-
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import com.ClinicaDH.ProyectoFinalBackEndI.login.model.AppUserRoles;
 
 @Entity
 public class AppUser implements UserDetails {
