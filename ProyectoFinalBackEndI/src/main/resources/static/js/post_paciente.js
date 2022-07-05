@@ -50,7 +50,7 @@ window.addEventListener("load", function () {
         numero: inputNumero.value,
         localidad: inputLocalidad.value,
         provincia: inputProvincia.value,
-      }
+      },
     };
 
     console.log(data);
