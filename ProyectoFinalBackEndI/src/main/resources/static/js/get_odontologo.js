@@ -17,7 +17,7 @@ $(document).ready(function(){
                 let odontologoRow = '<tr id=\"' + tr_id + "\"" + '>' +
                           '<td>' + get_More_Info_Btn + '</td>' +
                           '<td class=\"td_first_name\">' + odontologo.nombre.toUpperCase() + '</td>' +
-                          '<td class=\"td_last_name\">' + odontologo.apellido + '</td>' +
+                          '<td class=\"td_last_name\">' + odontologo.apellido.toUpperCase() + '</td>' +
                           '<td class=\"td_matricula\">' + odontologo.matricula + '</td>' +
                           '</tr>';                
                 $('#odontologoTable tbody').append(odontologoRow);

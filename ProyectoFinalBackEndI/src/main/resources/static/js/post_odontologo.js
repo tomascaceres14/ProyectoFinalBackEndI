@@ -1,4 +1,5 @@
 window.addEventListener("load", function () {
+
   const inputNombre = document.getElementById("nombre");
   const inputApellido = document.getElementById("apellido");
   const inputMatricula = document.getElementById("matricula");
