@@ -5,7 +5,6 @@ $(document).ready(function(){
             let odontologoId = $("#odontologo_id").val();
             
         let formData = {
-
             nombre : $("#nombre").val(),
             apellido :  $("#apellido").val(),
             matricula: $("#matricula").val(),
