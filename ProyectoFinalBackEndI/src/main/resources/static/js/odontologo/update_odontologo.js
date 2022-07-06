@@ -71,4 +71,21 @@ $(document).ready(function(){
             }
         });        
     });
+
+    $(document).on("click", "table button.btn-warning", function(){
+            let id_of_button = (event.srcElement.id);
+            let odontologoId = id_of_button.split("_")[2];
+
+            $.ajax({
+                url: '/odontologos/eliminar/' + odontologoId,
+                type: 'delete',
+                success: function(response) {
+                    $("#tr_" + odontologoId).css({"display": "none"});
+                },
+                error: function(error){
+                    console.log(error);
+                    alert("Error -> " + error);
+                }
+            });
+        });
 });
