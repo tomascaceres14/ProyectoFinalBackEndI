@@ -12,6 +12,11 @@ $(document).ready(function(){
                                             ' type="button" class="btn btn-info btn_id">' + 
                                             odontologo.id +
                                             '</button>';
+                let delete_Btn = '<button' +
+                                            ' id=' + '\"' + 'delete_id_' + odontologo.id + '\"' +
+                                            ' type="button" class="btn btn-info btn-warning claseprueba">' +
+                                            '<strong>Del</strong>' +
+                                            '</button>';
                 
                 let tr_id = 'tr_' + odontologo.id;
                 let odontologoRow = '<tr id=\"' + tr_id + "\"" + '>' +
@@ -19,6 +24,7 @@ $(document).ready(function(){
                           '<td class=\"td_first_name\">' + odontologo.nombre.toUpperCase() + '</td>' +
                           '<td class=\"td_last_name\">' + odontologo.apellido.toUpperCase() + '</td>' +
                           '<td class=\"td_matricula\">' + odontologo.matricula + '</td>' +
+                          '<td>' + delete_Btn + '</td>' +
                           '</tr>';                
                 $('#odontologoTable tbody').append(odontologoRow);
               });
