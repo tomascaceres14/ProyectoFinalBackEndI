@@ -126,7 +126,7 @@ window.addEventListener("load", () => {
     actualizarOdontologo();
   }
 
-  /* formulario para update*/
+  /* formulario para update */
 
   function actualizarOdontologo() {
     let idBtn = document.querySelectorAll(".id-btn");
