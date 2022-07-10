@@ -5,18 +5,28 @@ window.addEventListener("load", ()=>{
   let apellido = document.getElementById("apellido")
   let matricula = document.getElementById("matricula")
   let odontologos =document.querySelector(".odontologo")
-  let idBtns =document.querySelectorAll(".id-btn")
+
 
 
 
   /* ocultar formulario*/
   function ocultarActualizacion(){
+  let idBtns =document.querySelectorAll(".id-btn")
       idBtns.forEach(boton => {
                 boton.addEventListener("click", (e) =>{
                   e.preventDefault();
-                  console.log("entra aquí");
+                  const stringId = e.target.id.split("_")
+                  const idModificar = stringId[1]
+                  console.log(idModificar);
 
-                  const oculto = document.getElementById("oculto")
+
+                  console.log(oculto);
+                  const oculto = document.getElementById("form_${idModificar}")
+                  /*if(oculto.className === 'oculto'){
+                      oculto.className = '';
+                  } else {
+                      oculto.className = 'oculto';
+                  }*/
                   oculto.classList.toggle("oculto")
 
                 })
@@ -79,7 +89,8 @@ window.addEventListener("load", ()=>{
   /* Función para renderizar odontologos */
 
    function renderizarOdontologos(listado) {
-      odontologos.innerHTML = "";
+
+        odontologos.innerHTML = "";
 
       listado.forEach((odontologo) => {
           odontologos.innerHTML += `
@@ -90,8 +101,8 @@ window.addEventListener("load", ()=>{
               <p>${odontologo.matricula}</p>
               <button class="borrar" id="${odontologo.id}">Borrar</button>
           </li>
-          <div class="oculto" id="update_odontologo">
-                      <form class="update" id="form_${odontologo.id}">
+          <div id="update_odontologo">
+                      <form class="update oculto" id="form_${odontologo.id}">
                       <div class="form-group">
                           <label class="control-label" for="nombre">Nombre:  </label>
                           <input type="text" class="form-control" id="nombre_update""
