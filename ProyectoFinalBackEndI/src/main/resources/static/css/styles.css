@@ -204,6 +204,76 @@ button {
   gap: 15px;
 }
 
+
+
+.contenedor_pacientes {
+  width: 100vw;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(7, 1fr);
+  border: none;
+  color: var(--color-grey-1);
+}
+
+#add_new_paciente {
+  display: flex;
+  flex-wrap: wrap;
+  height: 200px;
+  margin-bottom: 25px;
+}
+
+.formulario_pacientes {
+  height: 50px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+h3{
+  color: var(--color-grey-2);
+}
+
+.formulario_domicilio {
+  height: 50px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-paciente {
+  position: relative;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: var(--color-grey-3);
+  margin: 0;
+}
+
+.paciente {
+  width: 100vw;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(7, 1fr);
+  border: none;
+  color: var(--color-grey-1);
+}
+
+#update_pacientes{
+  border: solid var(--color-grey-4);
+  height: 300px;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.update_paciente {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+
 .oculto {
   display: none;
 }

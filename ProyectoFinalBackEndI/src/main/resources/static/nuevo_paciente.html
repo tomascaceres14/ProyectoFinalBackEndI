@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Nuevo Paciente</title>
+</head>
+
+<body>
+<form id="add_new_paciente">
+    <section class="formulario_pacientes">
+        <h3> Paciente</h3>
+        <div class="form-group">
+            <label class="control-label" for="nombre">Nombre: </label>
+            <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre" name="nombre"
+                   required></input>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="apellido">Apellido: </label>
+            <input type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido" name="apellido"
+                   required></input>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="dni">Dni: </label>
+            <input type="text" class="form-control" id="dni" placeholder="Ingrese la matricula" name="matricula"
+                   required></input>
+        </div>
+    </section>
+    <section class="formulario_domicilio">
+        <h3>Domicilio</h3>
+        <div class="form-group">
+            <label class="control-label" for="id_domicilio">Domicilio id: </label>
+            <input type="text" class="form-control" id="id_domicilio" placeholder="Ingrese el id del domicilio si ya existe"
+                   name="matricula"></input>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="calle">Calle: </label>
+            <input type="text" class="form-control" id="calle" placeholder="Ingrese la calle"
+                   name="matricula" ></input>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="numero">Numero: </label>
+            <input type="text" class="form-control" id="numero" placeholder="Ingrese el numero"
+                   name="matricula"></input>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="localidad">Localidad: </label>
+            <input type="text" class="form-control" id="localidad" placeholder="Ingrese la localidad"
+                   name="matricula"></input>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="provincia">Provincia: </label>
+            <input type="text" class="form-control" id="provincia" placeholder="Ingrese la provincia"
+                   name="matricula"></input>
+        </div>
+    </section>
+
+    <button type="submit" class="btn-paciente btn-danger" id="btn-add-new-paciente">Guardar
+    </button>
+</form>
+
+<div class="listado_pacientes">
+    <h2 class="titulo">Listado de pacientes</h2>
+    <div class="contenedor_pacientes">
+        <p>ID</p>
+        <p>NOMBRE</p>
+        <p>APELLIDO</p>
+        <p>DNI</p>
+        <p>FECHA INGRESO</p>
+        <p>ID DOMICILIO</p>
+    </div>
+    <ul class="pacientes">
+        <li class="paciente">
+            <button class="id-btn" id="oculto_1">1</button>
+            <p>Juan</p>
+            <p>Perez</p>
+            <p>123456</p>
+            <p>29/04/2022</p>
+            <p>3</p>
+            <button class="borrar">Borrar</button>
+        </li>
+        <div id="update_pacientes">
+            <form class="update_paciente " id="form_1">
+                <section class="formulario_pacientes">
+                    <h3> Paciente</h3>
+                    <div class="form-group">
+                        <label class="control-label" for="nombre">Nombre: </label>
+                        <input type="text" class="form-control" id="nombre_update" placeholder="Ingrese el nombre"
+                               name="nombre" required></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="apellido">Apellido: </label>
+                        <input type="text" class="form-control" id="apellido_update" placeholder="Ingrese el apellido"
+                               name="apellido" required></input>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="dni">Dni: </label>
+                        <input type="text" class="form-control" id="dni_update" placeholder="Ingrese la matricula"
+                               name="dni" required></input>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="fecha_ingreso_update">Fecha ingreso: </label>
+                        <input type="text" class="form-control" id="fecha_ingreso_update"
+                               placeholder="Ingrese la matricula" name="fecha_ingreso" required></input>
+                    </div>
+                </section>
+                <section class="formulario_domicilio">
+                    <h3>Domicilio</h3>
+                    <div class="form-group">
+                        <label class="control-label" for="id_domicilio_update">Domicilio id: </label>
+                        <input type="text" class="form-control" id="id_domicilio_update" placeholder="Ingrese el id del domicilio si ya existe"
+                               name="id_domicilio" required></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="calle_update">Calle: </label>
+                        <input type="text" class="form-control" id="calle_update" placeholder="Ingrese la calle"
+                               name="calle_update" required></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="numero_update">Numero: </label>
+                        <input type="text" class="form-control" id="numero_update" placeholder="Ingrese el numero"
+                               name="numero_update" required></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="localidad_update">Localidad: </label>
+                        <input type="text" class="form-control" id="localidad_update" placeholder="Ingrese la localidad"
+                               name="localidad_update" required></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="provincia_update">Provincia: </label>
+                        <input type="text" class="form-control" id="provincia_update" placeholder="Ingrese la provincia"
+                               name="provincia_update" required></input>
+                    </div>
+                </section>
+
+                <button type="submit" class="actualizar">
+                    Actualizar
+                </button>
+                </form>
+
+        </div>
+    </ul>
+</div>
+<script src="/js/pacientes.js"></script>
+</body>
+
+</html>
