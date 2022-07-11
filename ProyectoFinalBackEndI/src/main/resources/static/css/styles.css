@@ -185,9 +185,7 @@ button {
   padding: 10px;
 }
 
-.oculto {
-  display: none;
-}
+
 
 .actualizar {
   padding: 3px;
@@ -204,4 +202,8 @@ button {
   height: 100px;
   align-items: center;
   gap: 15px;
+}
+
+.oculto {
+  display: none;
 }
