@@ -185,8 +185,6 @@ button {
   padding: 10px;
 }
 
-
-
 .actualizar {
   padding: 3px;
   margin-top: 1px;
@@ -203,8 +201,6 @@ button {
   align-items: center;
   gap: 15px;
 }
-
-
 
 .contenedor_pacientes {
   width: 100vw;
@@ -262,7 +258,7 @@ h3{
 
 #update_pacientes{
   border: solid var(--color-grey-4);
-  height: 300px;
+  height: fit-content;
   border-radius: 15px;
   padding: 10px;
 }
@@ -271,7 +267,6 @@ h3{
   display: flex;
   flex-wrap: wrap;
 }
-
 
 
 .oculto {

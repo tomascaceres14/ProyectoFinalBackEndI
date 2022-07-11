@@ -84,9 +84,21 @@ window.addEventListener("load", () => {
       .then((response) => response.json())
       .then((json) => {
         // Aqui obtenemos la respuesta de la API.
-        console.log("Paciente:", json);
+        console.log(json);
+                nombre.value = "";
+                apellido.value = "";
+                dni.value = "";
+                idDomicilio.value = "";
+                calle.value = "";
+                numero.value = "";
+                localidad.value = "";
+                provincia.value;
         consultarPacientes();
-      });
+      }).catch((error) => console.log(error))
+                .finally(() => {
+                                location.reload();
+                                consultarPacientes();
+                        });
   });
 
   /* Función para renderizar pacientes */
@@ -102,7 +114,7 @@ window.addEventListener("load", () => {
                 <p>${paciente.apellido}</p>
                 <p>${paciente.dni}</p>
                 <p>${paciente.fechaIngreso}</p>
-                <p>${paciente.idDomicilio}</p>
+                <p>${paciente.domicilio.id}</p>
                 <button class="borrar" id="${paciente.id}">Borrar</button>
             </li>
             <div id="update_pacientes">
@@ -131,28 +143,29 @@ window.addEventListener("load", () => {
                     <section class="formulario_domicilio">
                         <h3>Domicilio</h3>
                         <div class="form-group">
-                            <label class="control-label" for="id_domicilio_update">Domicilio id: </label>                                <input type="text" class="form-control" id="id_domicilio_update" placeholder="Ingrese el id del domicilio si ya existe"
-                                name="id_domicilio_${paciente.id}" required></input>
+                            <label class="control-label" for="id_domicilio_update">Domicilio id: </label>
+                                <input type="text" class="form-control" id="id_domicilio_update_${paciente.id}" placeholder="Ingrese el id"
+                                name="id_domicilio_update_${paciente.id}"></input>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="calle_update">Calle: </label>
-                            <input type="text" class="form-control" id="calle_update" placeholder="Ingrese la calle"
-                                name="calle_update_${paciente.id}" required></input>
+                            <input type="text" class="form-control" id="calle_update_${paciente.id}" placeholder="Ingrese la calle"
+                                name="calle_update_${paciente.id}"></input>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="numero_update">Numero: </label>
-                            <input type="text" class="form-control" id="numero_update" placeholder="Ingrese el numero"
-                                name="numero_update_${paciente.id}" required></input>
+                            <input type="text" class="form-control" id="numero_update_${paciente.id}" placeholder="Ingrese el numero"
+                                name="numero_update_${paciente.id}"></input>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="localidad_update">Localidad: </label>
                             <input type="text" class="form-control" id="localidad_update_${paciente.id}" placeholder="Ingrese la localidad"
-                                name="localidad_update" required></input>
+                                name="localidad_update"></input>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="provincia_update">Provincia: </label>
                             <input type="text" class="form-control" id="provincia_update_${paciente.id}" placeholder="Ingrese la provincia"
-                                name="provincia_update" required></input>
+                                name="provincia_update"></input>
                         </div>
                     </section>
                     <button type="submit" class="actualizar">
@@ -198,7 +211,7 @@ window.addEventListener("load", () => {
             dni: dniUpdate.value == "" ? null : dniUpdate.value,
             fechaIngreso: null,
             domicilio: {
-                id: idDomicilioUpdate.value == "" ? null : idDomicilioUpdate.value,
+                id: idDomicilioUpdate.value,
                 calle: calleUpdate.value == "" ? null : calleUpdate.value,
                 numero: numeroUpdate.value == "" ? null : numeroUpdate.value,
                 localidad: localidadUpdate.value == "" ? null : localidadUpdate.value,
